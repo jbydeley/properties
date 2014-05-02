@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.get('/properties', function(req, res) {
-	res.jsonp([]);
-});
+var PropertiesModule = require('./app/properties')();
+
+app.use('/properties', PropertiesModule.router);
 
 exports.app = app;
 exports.start = function() {
