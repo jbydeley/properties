@@ -6,3 +6,6 @@ app.get('/properties', function(req, res) {
 });
 
 exports.app = app;
+exports.start = function() {
+	app.listen(process.env.port || 3000);
+}
