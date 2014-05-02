@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
-    "test": "mocha -w -R spec --timeout 5000"
+    "test": "mocha -R spec"
   },
   "author": "Jared Bydeley",
   "dependencies": {
