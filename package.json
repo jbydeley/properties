@@ -9,18 +9,12 @@
   },
   "author": "Jared Bydeley",
   "dependencies": {
-    "sqlite3": "^2.2.3",
     "sequelize": "^1.7.0",
-    "connect": "^2.14.4",
     "express": "^4.0.0",
-    "morgan": "^1.0.0",
-    "body-parser": "^1.0.2",
-    "underscore": "^1.6.0",
-    "request": "^2.34.0",
-    "q": "^1.0.1"
+    "body-parser": "^1.0.2"
   },
   "devDependencies": {
-    "should": "^3.2.0",
-    "supertest": "^0.10.0"
+    "supertest": "^0.10.0",
+    "chai": "^1.9.1"
   }
 }

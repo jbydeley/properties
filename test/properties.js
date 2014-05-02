@@ -1,4 +1,6 @@
 var request = require('supertest');
+var assert = require('chai').assert;
+
 var app = require('../server.js').app;
 
 describe('Properties', function() {
@@ -6,6 +8,12 @@ describe('Properties', function() {
 		request(app)
 			.get('/properties')
 			.expect('Content-Type', /json/)
-			.expect(200, done)
+			.expect(200)
+			.end(function(err, res) {
+				if (err) throw err;
+
+				assert.typeOf(res.body, 'array');
+				done();
+			});
 	});
 });
