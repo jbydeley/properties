@@ -1,30 +1,67 @@
-var stubbedData = [{
-	name: 'Nice house by the beach!',
-	rate: 800
-},{
-	name: 'A big boat ride!',
-	rate: 90
-},{
-	name: 'A villa',
-	rate: 10000
-},{
-	name: 'A shack!',
-	rate: 10
-}];
-
 exports.get = function (req, res) {
-	res.jsonp(stubbedData);
+	req.db.findAll()
+		.error(function(err) {
+			res.send(500, 'Error loading properties');
+		})
+		.success(function(properties) {
+			res.jsonp(properties);
+		});
 };
 
 exports.getById = function (req, res) {
-	// TODO: Add 404 if data not found. This is bad but should get me green.
-	res.jsonp(stubbedData[req.params.id]);
+	req.db.find(req.params.id)
+		.error(function(err) {
+			res.send(500, 'Error loading property');
+		})
+		.success(function(property) {
+			if (!property) {
+				res.jsonp(404, 'Property not found');
+			} else {
+				res.jsonp(property);
+			}
+		});
 };
 
 exports.create = function (req, res) {
-	res.jsonp(req.body);
+	req.db.create(req.body)
+		.error(function(err) {
+			res.send(500, 'Error saving property');
+		})
+		.success(function(property) {
+			res.jsonp(property);
+		});
+};
+
+exports.update = function (req, res) {
+	req.db.find(req.params.id)
+		.error(function(err) {
+			res.send(500, 'Error updating property');
+		})
+		.success(function(property) {
+			if (!property) {
+				res.send(404, 'Property not found');
+			} else {
+				property.updateAttributes(req.body)
+					.success(function(property) {
+						res.jsonp(property);
+					});
+			}
+		});
 };
 
 exports.delete = function (req, res) {
-	res.send(204);
+	req.db.find(req.params.id)
+		.success(function(property) {
+			if (property) {
+				property.destroy()
+					.error(function(err) {
+						res.send(500, 'Error deleting property');
+					})
+					.success(function() {
+						res.send(204);
+					});
+			} else {
+				res.send(404);
+			}
+		});
 }

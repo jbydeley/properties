@@ -1,0 +1,26 @@
+{
+	"production": {
+		"db": {
+			"username": "root",
+			"password": "password",
+			"name": "myProperties",
+			"options": {
+				"dialect": "sqlite",
+				"storage": "myProperties.sqlite",
+				"logging": false
+			}
+		}
+	},
+	"development": {
+		"db": {
+			"username": "root",
+			"password": "password",
+			"name": "myProperties",
+			"options": {
+				"dialect": "sqlite",
+				"storage": "myPropertiesDev.sqlite",
+				"logging": false
+			}
+		}
+	}
+}
